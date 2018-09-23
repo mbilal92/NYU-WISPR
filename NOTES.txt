@@ -34,7 +34,7 @@ cd ryu/bin
 
 ./ryu-manager ../ryu/app/gui_topology/gui_topology.py /home/ubuntu/RYUNEW/ryu/ryu/app/simple_switch_13.py  --observe-links 
 
-./ryu-manager ryu.topology.switches ryu.app.rest_topology ryu.app.ofctl_rest  /home/ubuntu/RYUNEW/ryu/ryu/app/ryu_multipath.py  --observe-links
+./ryu-manager ryu.topology.switches ryu.app.rest_topology ryu.app.ofctl_rest  /home/ubuntu/NYU/RYUNEW/ryu/ryu/app/ryu_multipath.py  --observe-links
 
 
 

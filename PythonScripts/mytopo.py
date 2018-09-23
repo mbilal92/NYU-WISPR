@@ -16,6 +16,7 @@ from mininet.net import Mininet
 from mininet.topo import Topo
 from mininet.node import RemoteController, OVSSwitch
 from mininet.link import Intf
+from mininet.link import TCLink
 
 class MinimalTopo( Topo ):
     "Minimal topology with a single switch and two hosts"
@@ -54,12 +55,13 @@ def runMinimalTopo():
         controller=lambda name: RemoteController( name, ip='127.0.0.1' ),
         switch=OVSSwitch,
         autoSetMacs=True,
+        link=TCLink,
         build=False )
 
         
     s1 = net.addSwitch('s1')
-    _intf = Intf( "veth1", node=s1 )
-    _intf = Intf( "veth3", node=s1 )
+    # _intf = Intf( "veth1", node=s1 )
+    # _intf = Intf( "veth3", node=s1 )
         # Delete old tunnel if still exists*//*
     # s1.cmd('sudo ip tun del s1-gre1')
     # s1.cmd('sudo ip li ad s1-gre1 type gretap local 1.1.1.1 remote 2.2.2.1')
@@ -68,20 +70,20 @@ def runMinimalTopo():
 
 
     s2 = net.addSwitch('s2')
-    _intf = Intf( "veth5", node=s2 )
-    _intf = Intf( "veth7", node=s2 )
+    # _intf = Intf( "veth5", node=s2 )
+    # _intf = Intf( "veth7", node=s2 )
 
     s3 = net.addSwitch('s3')
-    _intf = Intf( "veth9", node=s3 )
-    _intf = Intf( "veth11", node=s3 )
+    # _intf = Intf( "veth9", node=s3 )
+    # _intf = Intf( "veth11", node=s3 )
 
     s4 = net.addSwitch('s4')
-    _intf = Intf( "veth13", node=s4 )
-    _intf = Intf( "veth15", node=s4 )
+    # _intf = Intf( "veth5", node=s4 )
+    # _intf = Intf( "veth7", node=s4 )
 
     s5 = net.addSwitch('s5')
-    _intf = Intf( "veth17", node=s5 )
-    _intf = Intf( "veth19", node=s5 )
+    # _intf = Intf( "veth17", node=s5 )
+    # _intf = Intf( "veth19", node=s5 )
 
     # _intf = Intf( "eth0", node=s4 )
 
@@ -96,16 +98,18 @@ def runMinimalTopo():
     # h3 = net.addHost('h3')
 
     net.addLink(s1, s2)
-    net.addLink(s2, s4)
-    net.addLink(s1, s3)
+    net.addLink(s2, s3,delay='1s')
     net.addLink(s3, s4)
-    net.addLink(s4, s5)
-    net.addLink(s3, s5)
-    net.addLink(s1, s5)
+    net.addLink(s4, s5, loss=25)
+    
+    # net.addLink(s3, s4)
+    # net.addLink(s4, s5)
+    # net.addLink(s3, s5)
+    # net.addLink(s1, s5)
 
     net.addLink(h1, s1)
     # net.addLink(h2, s1)
-    net.addLink(h2, s4)
+    net.addLink(h2, s5)
 
     # net.addLink(h2, s1)
     

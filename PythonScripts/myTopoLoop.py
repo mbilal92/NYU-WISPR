@@ -1,14 +1,18 @@
-#!/usr/bin/python
+# from mininet.net import Mininet
+# from mininet.cli import CLI
+# from mininet.log import setLogLevel, info
+# from mininet.node import Node
+import sys
+sys.setrecursionlimit(5000)
 
-"""
-A simple minimal topology script for Mininet.
+import matplotlib
+matplotlib.use('Agg')
 
-Based in part on examples in the [Introduction to Mininet] page on the Mininet's
-project wiki.
-
-[Introduction to Mininet]: https://github.com/mininet/mininet/wiki/Introduction-to-Mininet#apilevels
-
-"""
+try:
+    import matplotlib.pyplot as plt
+except:
+    raise
+import networkx as nx
 
 from mininet.cli import CLI
 from mininet.log import setLogLevel
@@ -16,100 +20,43 @@ from mininet.net import Mininet
 from mininet.topo import Topo
 from mininet.node import RemoteController, OVSSwitch
 from mininet.link import Intf
+from networkx.readwrite import json_graph
+import json
 
-class MinimalTopo( Topo ):
-    "Minimal topology with a single switch and two hosts"
-
-
-switches = []
-
-def runMinimalTopo():
-    "Bootstrap a Mininet network using the Minimal Topology"
-
-    topo = MinimalTopo()
-    net = Mininet(
-        topo=topo,
-        controller=lambda name: RemoteController( name, ip='127.0.0.1' ),
-        switch=OVSSwitch,
-        autoSetMacs=True,
-        build=False )
-
-    switchCounter = 1
-    interfaceCounter = 1
-
-    while switchCounter < 2:
-            s = net.addSwitch('s' + str(switchCounter) , protocols='OpenFlow13')
-            switches.append(s)
-            _intf = Intf( "veth" + str(interfaceCounter), node=s )
-            _intf = Intf( "veth" + str(interfaceCounter + 2), node=s )
-            switchCounter += 1
-            interfaceCounter += 4
-    for switch in switches:
-        print switch.dpid
-    h1 = net.addHost('h1')
-    # h2 = net.addHost('h2')
-
-    # net.addLink(switches[1-1], switches[2-1])
-    # net.addLink(switches[1-1], switches[3-1])
-    # net.addLink(switches[1-1], switches[4-1])
-
-    # net.addLink(switches[2-1], switches[5-1])
-    # net.addLink(switches[5-1], switches[7-1])
-
-    # net.addLink(switches[3-1], switches[7-1])
-
-    # net.addLink(switches[4-1], switches[6-1])
-    # net.addLink(switches[6-1], switches[7-1])
+def _tree_edges(n,r):
+    # helper function for trees
+    # yields edges in rooted tree at 0 with n nodes and branching ratio r
+    nodes=iter(range(n))
+    parents=[next(nodes)] # stack of max length r
+    while parents:
+        source=parents.pop(0)
+        for i in range(r):
+            try:
+                target=next(nodes)
+                parents.append(target)
+                yield source,target
+            except StopIteration:
+                break
 
 
-    _intf = Intf( "eth0", node=switches[1-1])
+jsonData = json.load(open("output_7415.json","r"))
 
-    # while switchCounter < 15:
-    #     s = net.addSwitch('s' + str(switchCounter))
-    #     switches.append(s)
-    #     _intf = Intf( "veth" + str(interfaceCounter), node=s )
-    #     _intf = Intf( "veth" + str(interfaceCounter + 2), node=s )
-    #     switchCounter += 1
-    #     interfaceCounter += 4
+G = nx.DiGraph()
+
+for edge in jsonData['edges']:
+  n1, n2 = edge['nodes']
+  G.add_edge(n1, n2)
+  G.add_edge(n2, n1)
+T = tree = nx.bfs_tree(G, 398686)
+
+T
+# def bfs(graph, start):
+#     visited, queue = set(), [start]
+#     while queue:
+#         vertex = queue.pop(0)
+#         if vertex not in visited:
+#             visited.add(vertex)
+#             queue.extend(graph[vertex] - visited)
+#     return visited
 
 
-    # h1 = net.addHost('h1')
-    # h2 = net.addHost('h2')
-    # # h3 = net.addHost('h3')
-
-    # i = 0
-    # while i < 5:
-    #     net.addLink(switches[i], switches[i+1])
-    # i = 5
-    # while i < 8:
-    #     net.addLink(switches[i], switches[i+1])
-
-    # i = 9
-    # while i < 13:
-    #     net.addLink(switches[i], switches[i+1])
-
-    # net.addLink(switches[0], switches[5])
-    # net.addLink(switches[4], switches[8])
-    # net.addLink(switches[4], switches[13])
-    # net.addLink(switches[1], switches[6])
-    # net.addLink(switches[6], switches[11])
-
-    net.addLink(h1, switches[0])
-    # net.addLink(h2, switches[6])
-
-    # net.addLink(h2, s1)
-    
-    net.build()
-    net.start()
-    
-    CLI( net )
-    net.stop()
-
-if __name__ == '__main__':
-    setLogLevel( 'info' )
-    runMinimalTopo()
-
-# Allows the file to be imported using `mn --custom <filename> --topospo minimal`
-topos = {
-    'minimal': MinimalTopo
-}
