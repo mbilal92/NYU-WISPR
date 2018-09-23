@@ -1,0 +1,65 @@
+iso.3.6.1.4.1.41112.1.1.1.1.1		Index for the ubntORTable
+iso.3.6.1.4.1.41112.1.1.1.2.1		OR ID
+iso.3.6.1.4.1.41112.1.1.1.3.1		Description of idenfifier
+iso.3.6.1.4.1.41112.1.4.1.1.1.1		Index for the ubntRadioTable
+iso.3.6.1.4.1.41112.1.4.1.1.2.1		Radio mode
+iso.3.6.1.4.1.41112.1.4.1.1.3.1		Country code
+iso.3.6.1.4.1.41112.1.4.1.1.4.1		Operating frequency
+iso.3.6.1.4.1.41112.1.4.1.1.5.1		DFS status
+iso.3.6.1.4.1.41112.1.4.1.1.6.1		Transmit power
+iso.3.6.1.4.1.41112.1.4.1.1.7.1		Distance
+iso.3.6.1.4.1.41112.1.4.1.1.8.1		Chainmask
+iso.3.6.1.4.1.41112.1.4.1.1.9.1		Antenna
+iso.3.6.1.4.1.41112.1.4.2.1.1.1.1		Index for the ubntRadioRssiTable
+iso.3.6.1.4.1.41112.1.4.2.1.1.1.2		
+iso.3.6.1.4.1.41112.1.4.2.1.2.1.1		Data frames rssi per chain
+iso.3.6.1.4.1.41112.1.4.2.1.2.1.2		
+iso.3.6.1.4.1.41112.1.4.2.1.3.1.1		Management frames rssi per chain
+iso.3.6.1.4.1.41112.1.4.2.1.3.1.2		
+iso.3.6.1.4.1.41112.1.4.2.1.4.1.1		Extension channel rssi per chain
+iso.3.6.1.4.1.41112.1.4.2.1.4.1.2		
+iso.3.6.1.4.1.41112.1.4.3.1.1.1		Index for the ubntAirSyncTable
+iso.3.6.1.4.1.41112.1.4.3.1.2.1		airSync mode - master/slave -- disabled = 0,master = 1,slave = 2,
+iso.3.6.1.4.1.41112.1.4.3.1.3.1		airSync client count
+iso.3.6.1.4.1.41112.1.4.3.1.4.1		airSync down utilization
+iso.3.6.1.4.1.41112.1.4.3.1.5.1		airSync up utilization
+iso.3.6.1.4.1.41112.1.4.4.1.1.1		Index for the ubntAirSelTable
+iso.3.6.1.4.1.41112.1.4.4.1.2.1		airSelect status - on/off -- true = 1,false = 2,
+iso.3.6.1.4.1.41112.1.4.4.1.3.1		airSelect hop interval (miliseconds)
+iso.3.6.1.4.1.41112.1.4.5.1.1.1		Index for the ubntWlStatTable
+iso.3.6.1.4.1.41112.1.4.5.1.10.1		RX rate
+iso.3.6.1.4.1.41112.1.4.5.1.11.1		Wireless security mode
+iso.3.6.1.4.1.41112.1.4.5.1.12.1		WDS - on/off -- true = 1,false = 2,
+iso.3.6.1.4.1.41112.1.4.5.1.13.1		AP repeater - on/off
+iso.3.6.1.4.1.41112.1.4.5.1.14.1		Channel Width
+iso.3.6.1.4.1.41112.1.4.5.1.15.1		Station count
+iso.3.6.1.4.1.41112.1.4.5.1.2.1		SSID
+iso.3.6.1.4.1.41112.1.4.5.1.3.1		Hide SSID - on/off -- true = 1,false = 2,
+iso.3.6.1.4.1.41112.1.4.5.1.4.1		AP MAC address
+iso.3.6.1.4.1.41112.1.4.5.1.5.1		Signal strength, dBm
+iso.3.6.1.4.1.41112.1.4.5.1.6.1		RSSI, dBm
+iso.3.6.1.4.1.41112.1.4.5.1.7.1		CCQ in %
+iso.3.6.1.4.1.41112.1.4.5.1.8.1		Noise floor
+iso.3.6.1.4.1.41112.1.4.5.1.9.1		TX rate
+iso.3.6.1.4.1.41112.1.4.6.1.1.1		Index for the ubntAirMaxTable
+iso.3.6.1.4.1.41112.1.4.6.1.2.1		airMAX status - on/off -- true = 1,false = 2,
+iso.3.6.1.4.1.41112.1.4.6.1.3.1		airMAX quality - percentage
+iso.3.6.1.4.1.41112.1.4.6.1.4.1		airMAX capacity - percentage
+iso.3.6.1.4.1.41112.1.4.6.1.5.1		airMAX priority - none/high/low/medium --- high = 0,medium = 1,low = 2,none = 3,
+iso.3.6.1.4.1.41112.1.4.6.1.6.1		airMAX NoACK mode - on/off
+iso.3.6.1.4.1.41112.1.4.7.1.1.1.4.24.214.76.238.111		Station MAC address
+iso.3.6.1.4.1.41112.1.4.7.1.10.1.4.24.214.76.238.111	Last known IP address	
+iso.3.6.1.4.1.41112.1.4.7.1.11.1.4.24.214.76.238.111	TX rate
+iso.3.6.1.4.1.41112.1.4.7.1.12.1.4.24.214.76.238.111	RX rate	
+iso.3.6.1.4.1.41112.1.4.7.1.13.1.4.24.214.76.238.111		TX bytes
+iso.3.6.1.4.1.41112.1.4.7.1.14.1.4.24.214.76.238.111		RX bytes
+iso.3.6.1.4.1.41112.1.4.7.1.15.1.4.24.214.76.238.111		Connection Time in seconds
+iso.3.6.1.4.1.41112.1.4.7.1.2.1.4.24.214.76.238.111		Station name
+iso.3.6.1.4.1.41112.1.4.7.1.3.1.4.24.214.76.238.111		Signal strength, dBm
+iso.3.6.1.4.1.41112.1.4.7.1.4.1.4.24.214.76.238.111		Noise floor
+iso.3.6.1.4.1.41112.1.4.7.1.5.1.4.24.214.76.238.111		Distance
+iso.3.6.1.4.1.41112.1.4.7.1.6.1.4.24.214.76.238.111		CCQ in %
+iso.3.6.1.4.1.41112.1.4.7.1.7.1.4.24.214.76.238.111		airMAX priority
+iso.3.6.1.4.1.41112.1.4.7.1.8.1.4.24.214.76.238.111		airMAX quality
+iso.3.6.1.4.1.41112.1.4.7.1.9.1.4.24.214.76.238.111		airMAX capacity
+site
