@@ -1,0 +1,125 @@
+tail -f -n 10 /var/log/syslog | grep wispr
+
+//////////////////////////////////////////////
+mininet Vm
+ssh -Y mininet@192.168.61.128
+mininet
+
+mininet `dump` command o show all host
+net command to get links 
+sh ovs-ofctl show s1
+    sh to run on system terminal not on mininet terminal 
+
+sh ovs-ofctl add-flow s1 action=normal
+    action= normal 
+        traditional L2 behaviour
+sh ovs-ofctl dump-flows s1
+    dump all flows
+
+sh ovs-ofctl del-flow s1
+
+ovs-ofctl add-flow s1 dl_src=XXXX,dl_dst=XXXX,action=output:2
+
+ovs-osctl Bridge s2 protocol=OpenFlow13
+
+///////////////////////////////////////////////////
+clear logs
+sudo -s
+> /var/log/syslog
+
+
+cd ryu/bin
+./ryu-manager ../ryu/app/gui_topology/gui_topology.py /home/ubuntu/ryu/ryu/app/simple_switch.py --observe-links --verbose
+./ryu-manager --verbose ../ryu/app/simple_switch.py
+
+./ryu-manager ../ryu/app/gui_topology/gui_topology.py /home/ubuntu/RYUNEW/ryu/ryu/app/simple_switch_13.py  --observe-links 
+
+./ryu-manager ryu.topology.switches ryu.app.rest_topology ryu.app.ofctl_rest  /home/ubuntu/NYU/RYUNEW/ryu/ryu/app/ryu_multipath.py  --observe-links
+
+
+
+
+cd ryu/
+sudo mn --topo single,3 --mac --controller remote --switch ovsk
+sudo mn --topo linear --switch ovsk --controller remote
+
+*** sudo mn --custom ~/mininet/custom/topo-2sw-2host.py --topo mytopo --test pingall --mac
+
+
+tail -f -n 10 /var/log/syslog | grep 'wispr'
+sudo ovs-vsctl add-port s1 eth1
+
+sudo ovs-vsctl show
+
+
+sudo ip link add veth0 type veth peer name veth1
+
+sudo ip link add veth0 type veth peer name veth1
+sudo ip link add veth2 type veth peer name veth3
+sudo ip link add veth4 type veth peer name veth5
+sudo ifconfig veth0 10.0.0.3 netmask 255.255.255.0 up
+sudo ifconfig veth2 10.0.0.4 netmask 255.255.255.0 up
+sudo ifconfig veth3 10.0.0.5 netmask 255.255.255.0 up
+
+
+ip link del veth0
+
+
+dummy interfaces
+
+https://unix.stackexchange.com/questions/152331/how-can-i-create-a-virtual-ethernet-interface-on-a-machine-without-a-physical-ad
+
+
+sudo ip link add dummy1 type dummy
+sudo ip link add dummy2 type dummy
+sudo ip link set dummy1 arp on
+sudo ip link set dummy2 arp on
+sudo ip address add 10.0.2.1/24 broadcast + dev dummy1
+sudo ip address add 11.0.2.1/24 broadcast + dev dummy2
+sudo ip link set dummy1 up
+sudo ip link set dummy2 up
+
+
+ip link add br0 type bridge
+ip link set dummy1 arp on
+ip link set dummy2 arp on
+
+ip link set dev dummy1 master br0
+ip link set dev dummy2 master br0
+
+ip address add 10.0.2.1/24 broadcast + dev br0
+sudo ip address add 10.0.2.2/24 broadcast + dev dummy1
+sudo ip address add 10.0.2.3/24 broadcast + dev dummy2
+
+sudo ip link set dummy1 up
+sudo ip link set dummy2 up
+ip link set br0 up
+
+
+
+minupuate packet
+socket (AF_INET, SOCK_RAW, IPPROTO_RAW);
+bind to socket
+
+
+RAW PACKET:
+socket (PF_PACKET, SOCK_RAW, htons (ETH_P_ALL));
+
+http://www.pdbuchan.com/rawsock/rawsock.html
+
+
+
+write" instead of "sendto" , although it isn't advisable.
+A fresh socket for sending only.
+It seems the SO_BINDTODEVICE using setsockopt doesn't work properly so I had to use a bind function to bind the socket to the interface.
+struct sockaddr_in to struct sockaddr_ll
+
+
+ h1 python -m SimpleHTTPServer 80 &
+ h2 wget -O - h1
+////////////////////////////////////
+
+ovs-vsctl add-port br-int allgre -- set interface gre0 ofport_request=3 type=gre options:remote_ip=flow options:key=flow
+
+
+sh ovs-ofctl dump-flows s1 -O OpenFlow13

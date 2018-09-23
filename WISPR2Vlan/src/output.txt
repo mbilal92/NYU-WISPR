@@ -1,0 +1,2 @@
+gcc  -w -c wisprd.c wispr_proto.c wispr_net.c
+gcc wisprd.o wispr_proto.o wispr_net.o -o wispr -ldaemon
